@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#2457d6">
+  <meta name="description" content="Sistema de registro y administración de calificaciones del personal."><title>Sistema de registro de calificaciones</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header class="topbar" id="topbar">
+  <a class="brand" href="#" aria-label="Sistema de registro de calificaciones"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M8 5.5h11l5 5V26H8z"/><path d="M19 5.5v5h5M12 16h8M12 20h8"/></svg></span><strong>Sistema de registro de calificaciones</strong></a>
+  <button id="logout" class="btn btn-ghost" type="button">Cerrar sesión <span aria-hidden="true">↗</span></button>
+</header>
+<main class="container">
+  <section id="login" class="login-shell">
+    <article class="login-card">
+      <div class="login-mark" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M16 10h23l10 10v34H16z"/><path d="M39 10v11h10M23 31h19M23 38h19M23 45h13"/></svg></div>
+      <p class="eyebrow">ACCESO AL SISTEMA</p><h1>Sistema de registro<br><span>de calificaciones</span></h1>
+      <p class="login-intro">Ingresá con tu número de documento para continuar.</p>
+      <form id="loginform" novalidate><label for="dni">Documento</label><div class="input-icon"><span aria-hidden="true">ID</span><input id="dni" inputmode="numeric" autocomplete="username" required maxlength="10" placeholder="Número de DNI" aria-describedby="loginmsg"></div><button class="btn btn-primary btn-full" type="submit">Ingresar <span aria-hidden="true">→</span></button><p id="loginmsg" class="feedback" role="alert" aria-live="polite"></p></form>
+      <div class="login-foot"><span class="secure-dot"></span> Acceso exclusivo para personal autorizado</div>
+    </article>
+  </section>
+
+  <section id="staff" class="hidden user-workspace">
+    <div class="welcome-line"><div><p class="eyebrow">MI ESPACIO</p><h1>Mis calificaciones</h1></div></div>
+    <article class="panel person-card"><div class="person-avatar" id="staffInitials">U</div><div class="person-main"><span class="card-kicker">DATOS DEL EFECTIVO</span><h2 id="staffName">—</h2><div class="person-meta"><span id="staffHierarchy">—</span><span class="meta-separator">•</span><span id="staffDni">DNI —</span></div></div><span class="person-state" id="staffState">Pendiente</span></article>
+    <div id="notice" class="notice hidden"></div>
+    <article class="panel rating-panel">
+      <div class="panel-head"><div><span class="card-kicker">CARGA ANUAL</span><h2>Registrar calificaciones</h2><p class="muted">Elegí uno o varios años entre 2015 y 2050. Guardá todo al finalizar.</p></div></div>
+      <div class="entry-grid"><div class="field"><label for="staffYear">Año calificado</label><select id="staffYear"></select></div><div class="field note-field"><label for="staffNote">Nota</label><input id="staffNote" type="number" inputmode="decimal" min="0" max="10" step="0.01" placeholder="0,00 a 10,00"></div><label class="not-rated"><input id="staffNotRated" type="checkbox"><span><strong>NO FUE CALIFICADO</strong><small>Marcar si no corresponde una nota</small></span></label><button id="addStaffYear" class="btn btn-secondary" type="button">+ Agregar año</button></div>
+      <p id="staffmsg" class="feedback" role="status" aria-live="polite"></p>
+      <div class="list-head"><h3>Calificaciones cargadas</h3><span id="staffListHint">Todavía no agregaste años</span></div><div id="staffStaged" class="staged-list"><div class="staged-empty">Las notas que agregues aparecerán acá.</div></div>
+      <div class="panel-bottom"><span class="save-help">Revisá los años agregados antes de guardar todo.</span><button id="saveStaff" class="btn btn-primary" type="button" disabled>Guardar todo</button></div>
+    </article>
+  </section>
+
+  <section id="admin" class="hidden admin-workspace">
+    <nav class="admin-nav" aria-label="Menú de administración"><button class="nav-item active" data-view="admin-own"><span aria-hidden="true">✎</span><strong>Mis calificaciones</strong></button><button class="nav-item" data-view="admin-roster"><span aria-hidden="true">☷</span><strong>Lista de efectivos</strong></button><button class="nav-item" data-view="admin-users"><span aria-hidden="true">♙</span><strong>Usuarios y permisos</strong></button></nav>
+    <section id="admin-own" class="admin-view">
+      <div class="view-heading"><div><p class="eyebrow">MI ESPACIO</p><h1>Mis calificaciones</h1><p class="muted">Cargá tus notas como efectivo y guardalas en un solo envío.</p></div></div>
+      <article class="panel person-card"><div class="person-avatar" id="adminInitials">U</div><div class="person-main"><span class="card-kicker">DATOS DEL EFECTIVO</span><h2 id="adminName">—</h2><div class="person-meta"><span id="adminHierarchy">—</span><span class="meta-separator">•</span><span id="adminDni">DNI —</span></div></div><span class="person-state" id="adminState">Pendiente</span></article>
+      <div id="ownNotice" class="notice hidden"></div>
+      <article class="panel rating-panel"><div class="panel-head"><div><span class="card-kicker">CARGA ANUAL</span><h2>Registrar calificaciones</h2><p class="muted">Elegí uno o varios años entre 2015 y 2050. Guardá todo al finalizar.</p></div></div>
+        <div class="entry-grid"><div class="field"><label for="ownYear">Año calificado</label><select id="ownYear"></select></div><div class="field note-field"><label for="ownNote">Nota</label><input id="ownNote" type="number" inputmode="decimal" min="0" max="10" step="0.01" placeholder="0,00 a 10,00"></div><label class="not-rated"><input id="ownNotRated" type="checkbox"><span><strong>NO FUE CALIFICADO</strong><small>Marcar si no corresponde una nota</small></span></label><button id="addOwnYear" class="btn btn-secondary" type="button">+ Agregar año</button></div>
+        <p id="ownmsg" class="feedback" role="status" aria-live="polite"></p><div class="list-head"><h3>Calificaciones cargadas</h3><span id="ownListHint">Todavía no agregaste años</span></div><div id="ownStaged" class="staged-list"><div class="staged-empty">Las notas que agregues aparecerán acá.</div></div><div class="panel-bottom"><span class="save-help">Revisá los años agregados antes de guardar todo.</span><button id="saveOwn" class="btn btn-primary" type="button" disabled>Guardar todo</button></div>
+      </article>
+    </section>
+    <section id="admin-roster" class="admin-view hidden">
+      <div class="view-heading heading-actions"><div><p class="eyebrow">PERSONAL</p><h1>Lista de efectivos</h1><p class="muted">Consultá las notas y administrá los registros.</p></div><button id="export" class="btn btn-primary" type="button">↓ Exportar CSV</button></div>
+      <div id="stats" class="stats"></div><article class="panel table-panel"><div class="table-toolbar"><div><h2>Nómina general</h2><p class="muted">Personal habilitado en el sistema.</p></div><label class="searchbox" for="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Buscar DNI, jerarquía o nombre"></label></div><div class="tablewrap"><table><thead><tr><th>DNI</th><th>Jerarquía</th><th>Nombre completo</th><th>Calificaciones recientes</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="rows"></tbody></table></div><div id="empty" class="empty hidden">No se encontraron registros.</div></article>
+    </section>
+    <section id="admin-users" class="admin-view hidden">
+      <div class="view-heading"><p class="eyebrow">PERMISOS</p><h1>Administración de usuarios</h1><p class="muted">Definí qué efectivos tienen acceso al panel de administrador.</p></div>
+      <article class="panel table-panel"><div class="table-toolbar"><div><h2>Usuarios y permisos</h2><p class="muted">El acceso se asigna a personas que figuran en la nómina.</p></div><label class="searchbox" for="userSearch"><span aria-hidden="true">⌕</span><input id="userSearch" type="search" placeholder="Buscar usuario"></label></div><div class="tablewrap"><table class="users-table"><thead><tr><th>DNI</th><th>Jerarquía</th><th>Nombre completo</th><th>Permiso</th><th>Acción</th></tr></thead><tbody id="userRows"></tbody></table></div><div id="userEmpty" class="empty hidden">No se encontraron usuarios.</div><p id="usersMsg" class="feedback" role="status" aria-live="polite"></p></article>
+    </section>
+  </section>
+</main>
+<div id="modal" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="editTitle"><div class="panel modal-card"><div class="section-heading"><div><h2 id="editTitle">Editar calificaciones</h2><p id="editname" class="muted"></p></div><button id="closeEdit" class="iconbtn" type="button" aria-label="Cerrar">×</button></div><form id="editform"><div id="editfields" class="scores"></div><div class="actions"><button type="button" id="cancel" class="btn btn-secondary">Cancelar</button><button class="btn btn-primary" type="submit">Guardar cambios</button></div><p id="editmsg" class="feedback" role="status" aria-live="polite"></p></form></div></div>
+<script src="js/config.js"></script><script src="js/api.js"></script><script src="js/app.js"></script>
+</body></html>
